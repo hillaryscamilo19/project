@@ -1,4 +1,5 @@
 
+from uuid import UUID
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional
 from datetime import datetime
@@ -10,7 +11,7 @@ class UserBase(BaseModel):
     nombre_Usuario: str
     nombre: str
     extensión: Optional[str] = None
-    departamento_id: str  # Usamos el ID del departamento
+    departamento_id:  Optional[str]
     role: str = Field(..., pattern="^(usuario|soporte|administrador)$")
 
 class UserCreate(UserBase):
@@ -23,7 +24,6 @@ class User(UserBase):
     class Config:
         orm_mode = True
 
-
 # Esquemas para Autenticación
 class Token(BaseModel):
     access_token: str
@@ -32,7 +32,6 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     email: Optional[str] = None
 
-# Esquemas para Ticket
 # Esquemas para Ticket
 class TicketBase(BaseModel):
     title: str = Field(..., min_length=5)
@@ -82,15 +81,15 @@ class Ticket(TicketBase):
 
 # Esquemas para Departamento
 class DepartmentBase(BaseModel):
-    name: str = Field(..., min_length=2)
-    description: Optional[str] = None
+    nombre: str = Field(..., min_length=2)
+    decripcion: Optional[str] = None
 
 class DepartmentCreate(DepartmentBase):
     pass
 
 class Department(DepartmentBase):
     id: str
-    created_at: Optional[datetime] = None
+    create_at: Optional[datetime] = None
 
     class Config:
         orm_mode = True

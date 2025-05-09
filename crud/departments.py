@@ -9,7 +9,8 @@ def get_department_by_name(db: Session, name: str):
     return db.query(Department).filter(Department.name == name).first()
 
 def get_departments(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(Department).offset(skip).limit(limit).all()
+    return db.query(Department).order_by(Department.id).offset(skip).limit(limit).all()
+
 
 def create_department(db: Session, department: DepartmentCreate):
     db_department = Department(

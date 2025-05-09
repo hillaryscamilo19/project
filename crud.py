@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from models.models import Ticket as DBTicket
+from models.schemas import Ticket as DBTicket
 from schemas.schemas import TicketCreate
-from db.database import SessionLocal
+from database import SessionLocal
 
 def get_db():
     db = SessionLocal()

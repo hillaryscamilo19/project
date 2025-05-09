@@ -27,8 +27,8 @@ class User(Base):
     email = Column(String(255), unique=True, nullable=False)
     extensión = Column(String(50), nullable=True)
     nombre = Column(String(255), nullable=False)
-    departamento = Column(String(36), ForeignKey("Departamentos.id"))
-    role = Column(String(20), nullable=False)  # usuario, soporte, administrador
+    departamento_id = Column(String(36), ForeignKey("Departamentos.id"))  # ✅ Cambio aquí
+    role = Column(String(20), nullable=False)
     hashed_password = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
@@ -42,9 +42,9 @@ class Department(Base):
     __tablename__ = "Departamentos"
 
     id = Column(String(36), primary_key=True, default=generate_uuid)
-    name = Column(String(255), unique=True)
-    description = Column(Text, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    nombre = Column(String(255), unique=True)
+    decripcion = Column(Text, nullable=True)
+    create_at = Column(DateTime, default=datetime.utcnow)
 
     # Relaciones
     tickets = relationship("Ticket", back_populates="department_rel")

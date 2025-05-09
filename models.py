@@ -1,3 +1,4 @@
+from uuid import UUID
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional
 from datetime import datetime
@@ -6,7 +7,7 @@ class UserBase(BaseModel):
     email: EmailStr
     nombre_Usuario: str
     extensión: str
-    department: str
+    department: UUID
     nombre: str
     role: str = Field(..., pattern="^(usuario|soporte|administrador)$")
 
