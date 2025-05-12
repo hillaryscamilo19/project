@@ -4,6 +4,7 @@ from typing import List, Optional
 import os
 import shutil
 from pathlib import Path
+from config import BaseModelWithConfig
 from database import get_db
 
 from schemas.schemas import (
